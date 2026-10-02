@@ -1,0 +1,88 @@
+# ==============================================================================
+# FasalSetu — Requirements
+# ==============================================================================
+# This file documents all dependencies for the project.
+# For full setup instructions, see README.md
+# ==============================================================================
+
+
+# ── FRONTEND (Node.js / Next.js) ───────────────────────────────────────────────
+# The main application. Install with:
+#
+#   cd frontend
+#   npm install
+#
+# Then start the dev server:
+#
+#   npm run dev
+#
+# Core packages (managed by npm — see frontend/package.json for full list):
+#
+#   next@14.2.35                  – React framework (App Router, SSR)
+#   react@^18 / react-dom@^18     – UI library
+#   typescript@^5                 – Static typing
+#   tailwindcss@^3.4.1            – Utility-first CSS
+#   tw-animate-css@^1.4.0         – Tailwind animation utilities
+#   shadcn@^4.21.0                – Accessible UI components (CLI + primitives)
+#   @base-ui/react@^1.8.0         – Headless UI primitives used by shadcn components
+#   class-variance-authority@^0.7 – Component variant styling
+#   cn@^0.3.2                     – className merge helper (src/lib/utils.ts)
+#   lucide-react@^1.47.0          – Icons
+#   mapbox-gl@^3.31.0             – Interactive satellite maps
+#   @mapbox/mapbox-gl-draw@^1.5.2 – Field boundary drawing tools
+#   @turf/turf@^7.4.0             – Geospatial calculations (area, centroid)
+#   @tanstack/react-query@^5.103  – Server state management and caching
+#   recharts@^3.10.1              – Charts (NDVI season curve, mandi price trend,
+#                                   PriceForecastChart: 90 days Live + 30 days Estimate)
+#
+# External services used by the frontend:
+#   Mapbox GL tiles + Geocoding API (farm location search)
+#   → both require NEXT_PUBLIC_MAPBOX_TOKEN in frontend/.env.local
+#
+# Node.js version required: v18.17+ or v20+ (LTS)
+# npm version required:     v9+ or v10+
+
+
+# ── BACKEND (Python / FastAPI) ───────────────────────────────────────────────
+# A layered FastAPI service in backend/app/ (models/ schemas/ repositories/
+# integrations/ services/ routers/ core/). Install with:
+#
+#   cd backend
+#   python -m venv venv
+#   venv\Scripts\activate        (Windows)
+#   source venv/bin/activate     (Mac / Linux)
+#   pip install -r requirements.txt
+#
+# Then start the dev server:
+#
+#   uvicorn app.main:app --reload
+#
+# Core packages (see backend/requirements.txt for the authoritative list):
+#
+#   fastapi                       – Web framework
+#   uvicorn[standard]             – ASGI server
+#   pydantic / pydantic-settings  – Data validation and .env-backed settings
+#   sqlalchemy[asyncio]           – Async ORM (backend/app/core/database.py)
+#   asyncpg                       – Async PostgreSQL driver
+#   alembic                       – Async database migrations (backend/alembic/)
+#   httpx / requests              – HTTP clients for external API integrations
+#   apscheduler                   – Nightly jobs (satellite, environment, mandi prices + forecasts)
+#   tenacity                      – Retries for flaky external APIs (mandi prices, Open-Meteo, NewsAPI)
+#   numpy / pandas                – Mandi price time series (lags, rolling windows)
+#   scikit-learn / lightgbm       – Price forecast models (ridge, random forest, gradient-boosted trees)
+#   joblib                        – Trained model artifacts (PRICE_MODEL_DIR)
+#   google-genai                  – Gemini calls for the KrishiBot AI advisor (GEMINI_API_KEYS)
+#
+# External services used by the backend (keys go in the root .env):
+#   Google Earth Engine          – satellite analysis (GEE_PROJECT_ID + gcloud ADC login)
+#   Open-Meteo                   – weather forecast + history (no key)
+#   Agmarknet / CEDA / data.gov  – mandi prices (Agmarknet needs no key)
+#   Gemini                       – KrishiBot AI (GEMINI_API_KEYS)
+#   NewsAPI.org                  – News page (NEWS_API_KEY, free at newsapi.org/register)
+#
+# The Market page's sell-now / hold-N-days suggestion
+# (app/services/market_prices/price_service.py) needs no extra package: it
+# only reads stored prices and forecasts. Its holding-cost assumptions are
+# settings (MARKET_HOLDING_COST_PCT etc., see .env.example).
+#
+# Python version required: 3.10+

@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== STRICT LIGHT MODE LOCK ===== */
+:root,
+html,
+body,
+[data-theme='light'],
+.light {
+  color-scheme: light !important;
+  --background: 0 0% 100%;
+  --foreground: 152 54% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 152 54% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 152 54% 10%;
+  --primary: 140 72% 30%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 120 10% 94%;
+  --secondary-foreground: 152 54% 10%;
+  --muted: 40 18% 95%;
+  --muted-foreground: 152 20% 40%;
+  --accent: 35 90% 55%;
+  --accent-foreground: 152 54% 10%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 120 12% 88%;
+  --input: 120 12% 88%;
+  --ring: 140 72% 30%;
+  --radius: 0.75rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root, html, body {
+    color-scheme: light !important;
+    background-color: #ffffff !important;
+    color: #0f2d1a !important;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border box-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white text-farm-dark antialiased;
+    font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f4f4f0; }
+::-webkit-scrollbar-thumb { background: #a8c4a8; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #2d7a3a; }

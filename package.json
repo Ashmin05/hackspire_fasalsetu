@@ -1,0 +1,23 @@
+{
+  "name": "fasalsetu-project",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FasalSetu - Smart Farming, Satellite Advisory & Field Analytics Platform",
+  "scripts": {
+    "install:all": "npm --prefix frontend install",
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix frontend run start",
+    "lint": "npm --prefix frontend run lint"
+  },
+  "keywords": [
+    "farming",
+    "agriculture",
+    "nextjs",
+    "satellite",
+    "mapbox",
+    "precision-agriculture"
+  ],
+  "author": "",
+  "license": "ISC"
+}
