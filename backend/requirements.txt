@@ -1,0 +1,48 @@
+# ==============================================================================
+# FasalSetu — Backend Python Requirements
+# ==============================================================================
+# Install with:
+#   pip install -r requirements.txt
+#
+# Python version required: 3.10+
+# See root README.md for full setup instructions.
+# ==============================================================================
+
+fastapi>=0.110.0          # Web framework for building APIs
+uvicorn[standard]>=0.28.0 # ASGI server to run FastAPI
+pydantic[email]>=2.6.0    # Data validation (extra pulls in email-validator for EmailStr)
+pydantic-settings>=2.2.1  # Settings management, loads config from .env
+requests>=2.31.0          # HTTP client for external API calls
+httpx>=0.27.0             # Async HTTP client (for async endpoints)
+sqlalchemy[asyncio]>=2.0.25 # Async ORM
+asyncpg>=0.29.0           # Async PostgreSQL driver
+alembic>=1.13.1           # Database migrations
+bcrypt>=4.1.2              # Password hashing
+pyjwt>=2.8.0               # JWT access/refresh token encode-decode
+google-auth>=2.29.0        # Verifies "Sign in with Google" ID tokens
+shapely>=2.0.4              # Farm polygon validation
+pyproj>=3.6.1                # Equal-area projection for farm area/centroid math
+earthengine-api>=1.0.0       # Google Earth Engine: satellite crop-health analysis
+apscheduler>=3.10.4           # Nightly jobs: satellite timeseries + alerts, environment report, mandi prices + forecasts
+tenacity>=8.2.3              # Retries with exponential backoff for flaky external APIs (mandi prices, Open-Meteo, NewsAPI)
+
+# Mandi price forecasting (app/ml/price_forecast/)
+numpy>=1.26
+pandas>=2.2                  # Time-series dataset building (lags, rolling windows)
+scikit-learn>=1.5            # Ridge / random forest, imputation, pipelines
+lightgbm>=4.3                # Gradient-boosted trees
+joblib>=1.3                  # Model artifact storage
+# (The sell/hold suggestion, app/services/market_prices/price_service.py, only
+# reads stored forecasts -- no additional packages.)
+
+# Irrigation (FAO-56 water balance, app/services/irrigation_service.py): reuses
+# httpx (Open-Meteo's historical/archive endpoint) and earthengine-api (CHIRPS
+# daily rainfall) already listed above -- no new packages.
+
+# AI Advisor / KrishiBot (app/integrations/gemini_client.py,
+# app/services/advisor_service.py): structured-output Gemini calls, with the
+# scripted fallback in advisor_service.py needing nothing extra.
+google-genai>=1.5.0
+
+# Farmer news feed (app/integrations/news_client.py, NewsAPI.org): reuses httpx
+# and tenacity already listed above -- no new packages. Needs NEWS_API_KEY.

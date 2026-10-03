@@ -1,0 +1,1 @@
+{"output": {"type": "success", "message": "Data exists", "data": [{"commodity_id": 1, "commodity_name": "Wheat"}, {"commodity_id": 2, "commodity_name": "Paddy(Dhan)(Common)"}, {"commodity_id": 3, "commodity_name": "Rice"}, {"commodity_id": 23, "commodity_name": "Onion"}, {"commodity_id": 24, "commodity_name": "Potato"}, {"commodity_id": 78, "commodity_name": "Tomato"}]}}
